@@ -33,15 +33,15 @@ unordered_map<char,pi> moves = {{'L',{0,-1}},
 								{'D',{1,0}}};
 
 
-// Custom Class to maintain the Frontier (Open set)
-class Custom_Node{
+// Custom Class to maintain the nodes in the Frontier (Open set)
+class Node{
 	private:
 		// Variables for the node, its parent and what move led to this node
 		pi node;
 		pi parent;
 		char move;
 	public:
-		Custom_Node(pi node,pi parent,char move):node(node), parent(parent), move(move){
+		Node(pi node,pi parent,char move):node(node), parent(parent), move(move){
 		}
 		
 		// Formatted print
@@ -73,7 +73,7 @@ void printLegalMoves();
 void printExplored(map<pi,pair<pi,char>>& explored);
 void printPi(pi& pair_int);
 void printPic(pair<pi,char>& pic);
-void printFrontier(queue<Custom_Node> frontier);
+void printFrontier(queue<Node> frontier);
 bool isGoal(pi node);
 bool isStart(pi node);
 string bfs_search(vector<vector<char>>& maze, pi start, pi goal);
@@ -142,7 +142,7 @@ void printExplored(map<pi,pair<pi,char>>& explored){
 	}
 }
 
-void printFrontier(queue<Custom_Node> frontier){
+void printFrontier(queue<Node> frontier){
 //	Print the Frontier 
 	while(!frontier.empty()){
 		frontier.front().print();
@@ -192,9 +192,9 @@ string bfs_search(vector<vector<char>>& maze, pi start, pi goal){
 //  actions to be taken to get to the goal
 
 	string path;
-	queue<Custom_Node> frontier;
+	queue<Node> frontier;
 	map<pi,pair<pi,char>> explored;
-	Custom_Node frontier_node(start,start,'\0'); // start node
+	Node frontier_node(start,start,'\0'); // start node
 	frontier.push(frontier_node);
 	
 	while(!frontier.empty()){
@@ -203,7 +203,7 @@ string bfs_search(vector<vector<char>>& maze, pi start, pi goal){
 //		printFrontier(frontier);
 		
 		// For BFS pop the frontier in a FIFO manner
-		Custom_Node frontier_node = frontier.front();
+		Node frontier_node = frontier.front();
 		frontier.pop();
 		
 		// Current node in consideration
@@ -216,7 +216,7 @@ string bfs_search(vector<vector<char>>& maze, pi start, pi goal){
 			
 			// Add the children to the back of the Frontier
 			for(auto x: children){
-				Custom_Node child(x.second,node,x.first);
+				Node child(x.second,node,x.first);
 				frontier.push(child);
 			}
 			
