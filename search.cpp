@@ -34,14 +34,14 @@ unordered_map<char,pi> moves = {{'L',{0,-1}},
 
 
 // Custom Class to maintain the nodes in the Frontier (Open set)
-class Node{
+class FrontierNode{
 	private:
 		// Variables for the node, its parent and what move led to this node
 		pi node;
 		pi parent;
 		char move;
 	public:
-		Node(pi node,pi parent,char move):node(node), parent(parent), move(move){
+		FrontierNode(pi node,pi parent,char move):node(node), parent(parent), move(move){
 		}
 		
 		// Formatted print
@@ -73,7 +73,7 @@ void printLegalMoves();
 void printExplored(map<pi,pair<pi,char>>& explored);
 void printPi(pi& pair_int);
 void printPic(pair<pi,char>& pic);
-void printFrontier(queue<Node> frontier);
+void printFrontier(queue<FrontierNode> frontier);
 bool isGoal(pi node);
 bool isStart(pi node);
 string bfs_search(vector<vector<char>>& maze, pi start, pi goal);
@@ -142,7 +142,7 @@ void printExplored(map<pi,pair<pi,char>>& explored){
 	}
 }
 
-void printFrontier(queue<Node> frontier){
+void printFrontier(queue<FrontierNode> frontier){
 //	Print the Frontier 
 	while(!frontier.empty()){
 		frontier.front().print();
@@ -192,9 +192,9 @@ string bfs_search(vector<vector<char>>& maze, pi start, pi goal){
 //  actions to be taken to get to the goal
 
 	string path;
-	queue<Node> frontier;
+	queue<FrontierNode> frontier;
 	map<pi,pair<pi,char>> explored;
-	Node frontier_node(start,start,'\0'); // start node
+	FrontierNode frontier_node(start,start,'\0'); // start node
 	frontier.push(frontier_node);
 	
 	while(!frontier.empty()){
@@ -203,7 +203,7 @@ string bfs_search(vector<vector<char>>& maze, pi start, pi goal){
 //		printFrontier(frontier);
 		
 		// For BFS pop the frontier in a FIFO manner
-		Node frontier_node = frontier.front();
+		FrontierNode frontier_node = frontier.front();
 		frontier.pop();
 		
 		// Current node in consideration
@@ -216,7 +216,7 @@ string bfs_search(vector<vector<char>>& maze, pi start, pi goal){
 			
 			// Add the children to the back of the Frontier
 			for(auto x: children){
-				Node child(x.second,node,x.first);
+				FrontierNode child(x.second,node,x.first);
 				frontier.push(child);
 			}
 			
