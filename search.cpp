@@ -19,9 +19,9 @@ int main(int argc, char** argv) {
 
 	// Define the maze
 	vector<vector<char>> maze= {{'G', '#', ' '},
-								{' ', ' ', ' '},
-								{' ', '#', ' '},
-								{'#', 'S', ' '}};
+				    {' ', ' ', ' '},
+				    {' ', '#', ' '},
+				    {'#', 'S', ' '}};
 
 	// Define the start and Stop nodes								
 	pi start = make_pair(3,1);
@@ -29,9 +29,9 @@ int main(int argc, char** argv) {
 
 	// Define the moves allowed 
 	unordered_map<char,pi> moves = {{'L',{0,-1}},
-									{'R',{0,1}},
-									{'U',{-1,0}},
-									{'D',{1,0}}};
+					{'R',{0,1}},
+					{'U',{-1,0}},
+					{'D',{1,0}}};
 
 	cout<<"Maze\n";
 	printMaze(maze);
@@ -45,8 +45,8 @@ int main(int argc, char** argv) {
 
 
 string bfs_search(vector<vector<char>>& maze, pi start, pi goal, unordered_map<char,pi>& moves){
-//	Performs a Breadth-First Search on the maze and returns the 
-//  actions to be taken to get to the goal
+// Performs a Breadth-First Search on the maze and returns the 
+// actions to be taken to get to the goal
 
 	string path;
 	queue<FrontierNode> frontier;
