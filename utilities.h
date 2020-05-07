@@ -39,7 +39,7 @@ void printExplored(std::map<pi,std::pair<pi,char>>& explored);
 void printPi(pi& pair_int);
 void printPic(std::pair<pi,char>& pic);
 void printFrontier(std::queue<FrontierNode>& frontier);
-bool insideBounds(pi& node, std::pair<char,pi> move, std::vector<std::vector<char>>& maze);
+bool insideBounds(pi& child, std::vector<std::vector<char>>& maze);
 std::unordered_map<char,pi> getChildren(pi& node,std::vector<std::vector<char>>& maze, std::unordered_map<char,pi>& moves);
 bool isGoal(pi& node, std::vector<std::vector<char>>& maze);
 bool isStart(pi& node, std::vector<std::vector<char>>& maze);

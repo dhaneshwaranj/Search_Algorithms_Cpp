@@ -55,6 +55,7 @@ void printMaze(std::vector<std::vector<char>>& maze){
 		}
 		std::cout<<std::endl;
 	}
+	std::cout<<line<<std::endl;
 }
 
 void printMoves(std::unordered_map<char,pi>& moves){
@@ -96,13 +97,11 @@ void printFrontier(std::queue<FrontierNode>& frontier){
 	}
 }
 
-bool insideBounds(pi& node, std::pair<char,pi> move, std::vector<std::vector<char>>& maze){
+bool insideBounds(pi& child, std::vector<std::vector<char>>& maze){
 //	Utility function to check if a node is within the boundary
 //  after applying an action in a direction
 	bool ret;
-	int row = node.first+move.second.first;
-	int col = node.second+move.second.second;
-	ret = (row>=0&&row<maze.size() && col>=0&&col<maze[0].size());
+	ret = (child.first>=0 && child.first<maze.size() && child.second>=0 && child.second<maze[0].size());
 	return ret;
 }
 
@@ -111,11 +110,12 @@ std::unordered_map<char,pi> getChildren(pi& node, std::vector<std::vector<char>>
 //  current node
 	std::unordered_map<char,pi> children;
 	for(auto move: moves){
-		if(insideBounds(node,move,maze)){
-			int row = node.first + move.second.first;
-			int col = node.second + move.second.second;
+		int row = node.first + move.second.first;
+		int col = node.second + move.second.second;
+		pi child = std::make_pair(row,col);
+		if(insideBounds(child,maze)){
 			if(maze[row][col]!='#'){
-				children[move.first] = std::make_pair(row,col);
+				children[move.first] = child;
 			}
 		}
 	}
