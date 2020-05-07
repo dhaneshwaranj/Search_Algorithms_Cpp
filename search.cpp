@@ -41,7 +41,7 @@ int main(int argc, char** argv) {
 	// printMoves(moves);
 	// printLegalMoves(maze);
 	
-	string path = bfs_search(maze,start,goal,moves);
+	string path = dfs_search(maze,start,goal,moves);
 	cout<<"\nPath: "<<path<<endl;
 
 	return 0;
@@ -52,7 +52,6 @@ string bfs_search(vector<vector<char>>& maze, pi start, pi goal, unordered_map<c
 // Performs a Breadth-First Search on the maze and returns the 
 // actions to be taken to get to the goal
 
-	string path;
 	queue<FrontierNode> frontier;
 	map<pi,pair<pi,char>> explored;
 	FrontierNode frontier_node(start,start,'\0'); // start node
@@ -97,6 +96,7 @@ string bfs_search(vector<vector<char>>& maze, pi start, pi goal, unordered_map<c
 	// printExplored(explored);
 	
 	// Backtrack the path taken to get to the node
+	string path;
 	pi node = goal;
 	while(!isStart(node,maze)){
 		path = explored[node].second + path;
@@ -114,7 +114,6 @@ string dfs_search(vector<vector<char>>& maze, pi start, pi goal, unordered_map<c
 // Performs a Depth-First Search on the maze and returns the 
 // actions to be taken to get to the goal
 
-	string path;
 	stack<FrontierNode> frontier;
 	map<pi,pair<pi,char>> explored;
 	FrontierNode frontier_node(start,start,'\0'); // start node
@@ -137,7 +136,7 @@ string dfs_search(vector<vector<char>>& maze, pi start, pi goal, unordered_map<c
 			// Get the children of the current node		
 			unordered_map<char,pi> children = getChildren(node,maze,moves);
 			
-			// Add the children to the back of the Frontier
+			// Add the children to the top of the Frontier
 			for(auto x: children){
 				FrontierNode child(x.second,node,x.first);
 				frontier.push(child);
@@ -159,6 +158,7 @@ string dfs_search(vector<vector<char>>& maze, pi start, pi goal, unordered_map<c
 	// printExplored(explored);
 	
 	// Backtrack the path taken to get to the node
+	string path;
 	pi node = goal;
 	while(!isStart(node,maze)){
 		path = explored[node].second + path;

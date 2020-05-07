@@ -110,9 +110,11 @@ std::unordered_map<char,pi> getChildren(pi& node, std::vector<std::vector<char>>
 //  current node
 	std::unordered_map<char,pi> children;
 	for(auto move: moves){
+		
 		int row = node.first + move.second.first;
 		int col = node.second + move.second.second;
 		pi child = std::make_pair(row,col);
+
 		if(insideBounds(child,maze)){
 			if(maze[row][col]!='#'){
 				children[move.first] = child;
