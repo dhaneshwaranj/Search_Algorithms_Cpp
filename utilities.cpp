@@ -1,6 +1,3 @@
-#ifndef UTILITIES_CPP
-#define UTILITIES_CPP
-
 #include <iostream>
 #include <vector>
 #include <string>
@@ -9,54 +6,30 @@
 #include <map>
 #include <unordered_map>
 
-typedef std::pair<int,int> pi;
+#include "utilities.h"
 
-// Custom Class to maintain the nodes in the Frontier (Open set)
-class FrontierNode{
-	private:
-		// Variables for the node, its parent and what move led to this node
-		pi node;
-		pi parent;
-		char move;
-	public:
-		FrontierNode(pi node,pi parent,char move):node(node), parent(parent), move(move){
-		}
-		
-		// Formatted print
-		void print(){
-			std::cout<<"[("<<node.first<<","<<node.second<<"), "<<"("<<parent.first<<","<<parent.second<<"), "<<move<<"]"<<std::endl;
-		}
-		
-		// Get methods to access Private members
-		pi getNode(){
-			return node;
-		}
-		
-		pi getParent(){
-			return parent;
-		}
-		
-		char getMove(){
-			return move;
-		}
-};
+FrontierNode::FrontierNode(pi node,pi parent,char move) : 
+node(node), parent(parent), move(move)
+{
+}
 
+// Formatted print
+void FrontierNode::print(){
+	std::cout<<"[("<<node.first<<","<<node.second<<"), "<<"("<<parent.first<<","<<parent.second<<"), "<<move<<"]"<<std::endl;
+}
 
-// Declaring Functions
-void printMoves(std::unordered_map<char,pi>& moves);
-void printMaze(std::vector<std::vector<char>>& maze);
-std::unordered_map<char,pi> getChildren(pi& node,std::vector<std::vector<char>>& maze, std::unordered_map<char,pi>& moves);
-bool insideBounds(pi& node, std::pair<char,pi> move, std::vector<std::vector<char>>& maze);
-void printLegalMoves(std::vector<std::vector<char>>& maze, std::unordered_map<char,pi>& moves);
-void printExplored(std::map<pi,std::pair<pi,char>>& explored);
-void printPi(pi& pair_int);
-void printPic(std::pair<pi,char>& pic);
-void printFrontier(std::queue<FrontierNode>& frontier);
-bool isGoal(pi& node, std::vector<std::vector<char>>& maze);
-bool isStart(pi& node, std::vector<std::vector<char>>& maze);
+// Get methods to access Private members
+pi FrontierNode::getNode(){
+	return node;
+}
 
+pi FrontierNode::getParent(){
+	return parent;
+}
 
-
+char FrontierNode::getMove(){
+	return move;
+}
 
 // The first few functions named print are used to debug and view results
 void printLegalMoves(std::vector<std::vector<char>>& maze, std::unordered_map<char,pi>& moves){
@@ -158,6 +131,3 @@ bool isStart(pi& node, std::vector<std::vector<char>>& maze){
 //	Check to see if the node is the start node
 	return maze[node.first][node.second]=='S';
 }
-
-
-#endif // UTILITIES_CPP

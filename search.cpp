@@ -9,7 +9,8 @@
 #include <stack>
 #include <map>
 #include <unordered_map>
-#include "utilities.cpp"
+
+#include "utilities.h"
 
 using namespace std;
 
