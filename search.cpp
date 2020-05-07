@@ -1,6 +1,6 @@
 // This program is to find a path between a start and a
 // goal in a maze with obstacles. This program currently
-// just implements the BFS search, more to come.
+// just implements the BFS and DFS search, more to come.
 
 #include <iostream>
 #include <vector>
